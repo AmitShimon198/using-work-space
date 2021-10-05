@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { Modal } from '@reuse-react-components/experimenting.ui.modal';
+import { Button } from '@reuse-react-components/experimenting.ui.button';
 
+const portalElement = document.getElementById('overlays');
 function App() {
+  const [openExternally, setOpenExternally] = useState(false);
+
+  const toggleExternally = () => {
+    setOpenExternally(prevState => !prevState)
+  }
+
+  const onConfirm = () => {
+    toggleExternally()
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Button onClick={toggleExternally}>Open externally</Button>
+      <Modal
+        modalTitle={'modal using bit'}
+        portalElement={portalElement}
+        onClose={toggleExternally} 
+        isOpen={openExternally} >
+        <h1>Hi</h1>
+        <Button onClick={onConfirm}><span>Confirm</span></Button>
+      </Modal>
     </div>
   );
 }

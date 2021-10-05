@@ -2,20 +2,30 @@ import { useState } from 'react';
 import './App.css';
 import { Modal } from '@reuse-react-components/experimenting.ui.modal';
 import { Button } from '@reuse-react-components/experimenting.ui.button';
-import { calculateTwoNumbersSum } from './utils/calculateTowNumbersSum';
 import DisplaySum from './components/displaySum';
+import { findMatchPairToSum } from './utils/calculateTowNumbersSum';
 
 const portalElement = document.getElementById('overlays');
-const results = calculateTwoNumbersSum({ numbers: [1, 4, 6, 9, 7, 8, 22], sum: 15 })
 
 function App() {
   const [openExternally, setOpenExternally] = useState(false);
+  const [calculationResults, setCalculationResults] = useState<number[]>();
+  const [message, setMessage] = useState<string>();
+
   const toggleExternally = () => {
     setOpenExternally(prevState => !prevState)
   }
+  const findMatchPair = () => {
+    const results = findMatchPairToSum({ numbers: [1, 4, 6, 9, 7, 8, 22], sum: 26 })
+    if (results?.length) {
+      setCalculationResults(results);
+    } else {
+      setMessage('No result was found...')
+    }
+  }
 
   const onConfirm = (event: any) => {
-    toggleExternally()
+    toggleExternally();
   }
 
   return (
@@ -26,7 +36,12 @@ function App() {
         portalElement={portalElement}
         onClose={toggleExternally}
         isOpen={openExternally} >
-        <DisplaySum onConfirm={onConfirm} title={'Display Sum'} results={results} />
+        <DisplaySum
+          findMatchPair={findMatchPair}
+          onConfirm={onConfirm}
+          title={'Display Sum'}
+          results={calculationResults}
+          message={message} />
       </Modal>
     </div>
   );

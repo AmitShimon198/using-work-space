@@ -26,6 +26,7 @@ function App() {
 
   const onConfirm = (event: any) => {
     toggleExternally();
+    setMessage(undefined)
   }
 
   return (

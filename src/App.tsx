@@ -15,19 +15,17 @@ function App() {
 
   const toggleExternally = () => {
     setOpenExternally(prevState => !prevState);
-    setCalculationResults([]);
+    setCalculationResults(undefined);
     setMessage(undefined);
     setDisplaySum(undefined);
   }
   const findMatchPair = () => {
 
     const sum: number = Math.floor(Math.random() * 100)
-    console.log('sum', sum);
     const matchRes = findMatchPairToSum({
       numbers: Array.from({ length: 40 }, () => Math.floor(Math.random() * 40)),
       sum
     });
-    console.log('timeOut1000');
 
     if (matchRes?.results?.length) {
       setDisplaySum(matchRes?.sum)
@@ -37,7 +35,6 @@ function App() {
       setCalculationResults(undefined);
       setDisplaySum(undefined)
     }
-
   }
 
   const onConfirm = (event: any) => {

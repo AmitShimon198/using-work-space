@@ -7,8 +7,6 @@ export const findMatchPairToSum = ({ numbers, sum }: { numbers: number[], sum: n
             const pairIndex = dictionary[sum - number]
             if (pairIndex !== undefined) {
                 const results = [numbers[pairIndex], number]
-                console.log('findMatchPairToSum', results.toString());
-                console.log('findMatchPairToSum   sum', sum);
                 return { results, sum };
             }
             dictionary[number] = index;

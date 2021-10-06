@@ -1,8 +1,19 @@
 .container{
     text-align: center;
+    overflow: auto;
+    height: 50vh;
 }
 
-.button{
-    display: flex;
+.buttonContainer{
+    position: absolute;
+    bottom: 20px;
+    left: 22.5%;
     justify-content: end;
+}
+.button{
+    width: 25vh;
+    font-size: 12px;
+}
+.notFound{
+    height: 70vh;
 }
